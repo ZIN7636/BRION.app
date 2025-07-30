@@ -63,7 +63,7 @@ filtered_df = df[(df['Stage'] == stage) &
                  (df['gBRCA'] == gbrca) &
                  (df['PDL1'] == pdl1)].sort_values("TreatmentLine")
 
-st.markdown("### 2️⃣ 치료전략 및 약제 추천 결과"\n(Based on 2025 NCCN Guideline))
+st.markdown("### 2️⃣ 치료전략 및 약제 추천 결과\n(Based on 2025 NCCN Guideline)")
 
 if filtered_df.empty:
     st.warning("조건에 맞는 추천 약제가 없습니다. 다른 조건을 선택해보세요.")
