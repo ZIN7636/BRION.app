@@ -2,7 +2,7 @@
 import streamlit as st
 import pandas as pd
 
-st.set_page_config(page_title="유방암 약제 추천", layout="centered")
+st.set_page_config(page_title="유방암 병기 기반 약제 추천", layout="centered")
 st.markdown("<h2 style='text-align: center;'>📱 유방암 병기 기반 약제 추천 AI</h2>", unsafe_allow_html=True)
 st.markdown("---")
 
@@ -63,13 +63,14 @@ filtered_df = df[(df['Stage'] == stage) &
                  (df['gBRCA'] == gbrca) &
                  (df['PDL1'] == pdl1)].sort_values("TreatmentLine")
 
-st.markdown("### 2️⃣ 치료전략 및 약제 추천 결과\n(Based on 2025 NCCN Guideline)")
+st.markdown("### 2️⃣ 치료전략 및 약제 추천 결과\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Based on 2025 NCCN Guideline)")
 
 if filtered_df.empty:
     st.warning("조건에 맞는 추천 약제가 없습니다. 다른 조건을 선택해보세요.")
 else:
     for _, row in filtered_df.iterrows():
         with st.expander(f"💊 약제명: {row['RecommendedRegimen']} | 🩺 단계: {row['TreatmentLine']}", expanded=True):
+            st.markdown("---")
             st.markdown(f"**💊 약제명:** {row['RecommendedRegimen']}")
             st.markdown(f"**🩺 치료 단계:** {row['TreatmentLine']}")
             st.markdown(f"**📌 NCCN 권고 등급:** {row['NCCN_Category']}")
