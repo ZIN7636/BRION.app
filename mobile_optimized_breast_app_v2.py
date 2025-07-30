@@ -4,6 +4,7 @@ import pandas as pd
 
 st.set_page_config(page_title="유방암 약제 추천", layout="centered")
 st.markdown("<h2 style='text-align: center;'>📱 유방암 병기 기반 약제 추천 AI</h2>", unsafe_allow_html=True)
+st.markdown("---")
 
 df = pd.read_csv("nccn_breast_stage_drug_map_final_500plus.csv", encoding='cp949')
 treatment_order = ["Neoadjuvant", "Adjuvant", "1st line", "2nd+ line", "Recurrent"]
@@ -62,7 +63,7 @@ filtered_df = df[(df['Stage'] == stage) &
                  (df['gBRCA'] == gbrca) &
                  (df['PDL1'] == pdl1)].sort_values("TreatmentLine")
 
-st.markdown("### 2️⃣ 치료전략 및 약제 추천 결과")
+st.markdown("### 2️⃣ 치료전략 및 약제 추천 결과"\n(Based on 2025 NCCN Guideline))
 
 if filtered_df.empty:
     st.warning("조건에 맞는 추천 약제가 없습니다. 다른 조건을 선택해보세요.")
