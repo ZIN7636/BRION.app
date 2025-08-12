@@ -90,7 +90,7 @@ if filtered_df.empty:
 else:
     for _, row in filtered_df.iterrows():
         # 결과 출력 Expander
-        expander_title = f"💊 {row['RecommendedRegimen']} | {row['TreatmentLine']}"
+        expander_title = f"🩺 치료 단계: {row['TreatmentLine']} | 💊 약제명: {row['RecommendedRegimen']}"
         with st.expander(expander_title, expanded=True):
             st.markdown("---")
             
@@ -104,9 +104,9 @@ else:
                 dose_per_session = dose_per_session_raw
 
             # 결과 출력 (모바일에 최적화된 st.markdown 사용)
+            st.markdown(f"**🩺 치료 단계:** {row['TreatmentLine']}")
             st.markdown(f"**💊 약제명:** {row['RecommendedRegimen']}")
-            st.markdown(f"**🩺 치료단계:** {row['TreatmentLine']}")
-            st.markdown(f"**📌 NCCN 권고등급:** {row['NCCN_Category']}")
+            st.markdown(f"**📌 NCCN 권고 등급:** {row['NCCN_Category']}")
             st.markdown(f"**🧪 임상시험:** {row['Trial']}")
             
             # 급여여부 (모바일에 최적화된 st.success/error/info 사용)
@@ -116,9 +116,9 @@ else:
             elif coverage_text == "비급여":
                 st.error("❌ 급여여부: 비급여")
             else:
-                st.info(f"ℹ️ 급여여부: {coverage_text or '정보 없음'}")
+                st.info(f"ℹ️ 급여 여부: {coverage_text or '정보 없음'}")
 
             # 최종 데이터 파일의 컬럼을 직접 출력
-            st.markdown(f"**💉 권장용량:** {row['권장용량_표시']}")
+            st.markdown(f"**💉 권장 용량:** {row['권장용량_표시']}")
             st.markdown(f"**💊 1회 용량(160cm/60kg)mg:** {dose_per_session}")
             st.markdown(f"**💰 최종 단가:** {row['단가_표시']}")
